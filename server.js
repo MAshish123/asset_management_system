@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const routes = require('./src/routes')
+require('dotenv').config()
 const securityHeaders = require('./src/middlewares/security.header')
 const app = express()
 app.use(express.json())
@@ -10,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 app.use(securityHeaders)
 app.use(routes)
 
-mongoose.connect('mongodb://localhost:27017/testdb')
+mongoose.connect(process.env.DB_URL)
 .then(()=>{
     console.log('connected to db');
     
